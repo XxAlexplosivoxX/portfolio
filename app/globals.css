@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0b0f10;
+  --background-half: #152D2455;
+  --foreground: #d6e3da;
+  --accent: #72f1b8;
+  --muted: #91bda5;
+  --panel: #12181a;
+  --panel-accent: #152D24;
+  --border: #223035;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-panel: var(--panel);
+  --color-border: var(--border);
+  --font-sans: var(--font-jetbrains-mono);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+body {
+  color: var(--foreground);
+  font-family: var(--font-jetbrains-mono), monospace;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  outline-offset: 4px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 32%, black);
+  color: #08110d;
+}
+
+.bg-background {
+  background: linear-gradient(190deg, var(--background), var(--panel-accent)) !important;
+}
+
+.content {
+  margin-top: 80px;
+}
+
+.language-selector {
+  background-color: transparent;
+}
+
+.lang-butto {
+  border: 1px solid transparent;
+}
+
+.lang-button:hover {
+  border: 1px solid var(--foreground);
+}
+
+.nice-header {
+  background: linear-gradient(to bottom, var(--panel), transparent);
+  backdrop-filter: blur(4px);
+  width: 100vw;
+  transition: border-color 140ms ease, color 140ms ease, background-color 140ms ease;
+  position: fixed;
+}
+
+.terminal-panel {
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, transparent, var(--panel-accent));
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.terminal-panel:hover {
+  border-color: var(--accent);
+}
+
+.terminal-line {
+  color: var(--accent);
+  font-size: 0.875rem;
+}
+
+.tui-button {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  background: #0e141655;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.875rem;
+  color: var(--foreground);
+  transition: border-color 140ms ease, color 140ms ease, background-color 140ms ease;
+  border-radius: 4px;
+  padding: 0.7rem 1rem;
+}
+
+.tui-button:hover {
+  border-color: var(--accent);
+  color: var(--background);
+  background: var(--accent);
+}
+
+.skill-badge {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  background: #0e141655;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  color: var(--foreground);
+  border-radius: 4px;
+  transition: border-color 140ms ease, color 140ms ease, background-color 140ms ease;
+}
+
+.skill-badge:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: #0a1011;
+}
+
+.project-badge {
+  border: 1px solid var(--border);
+  background: #0e141655;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  color: var(--foreground);
+  border-radius: 4px;
+  transition: border-color 140ms ease, color 140ms ease, background-color 140ms ease;
+}
+
+.project-badge:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: #0a1011;
+}
