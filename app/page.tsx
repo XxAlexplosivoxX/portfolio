@@ -143,7 +143,7 @@ export default function Home() {
           <p className="font-semibold text-accent">al3x@portfolio:~$</p>
           <button
             type="button"
-            className="tui-button -skew-x-12 px-3 py-2 md:hidden"
+            className="tui-button -skew-x-12 px-3 py-2 md:!hidden"
             onClick={() => setMenuOpen((prev) => !prev)}
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
