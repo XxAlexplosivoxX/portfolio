@@ -272,7 +272,7 @@ export default function Home() {
           <div className="mt-6 grid gap-2 text-sm text-muted md:grid-cols-2">
             <p>{'> primary_focus = ["security", "performance", "reliability"]'}</p>
             <p>{'> preferred_stack = ["rust", "postgres", "linux", "docker"]'}</p>
-            <p>{'> current_role = "backend engineer"'}</p>
+            <p>{'> current_role = "software development student'}</p>
             <p>{'> location = "remote / async-first"'}</p>
           </div>
           <div className="mt-6 flex flex-wrap justify-center align-center gap-3">
