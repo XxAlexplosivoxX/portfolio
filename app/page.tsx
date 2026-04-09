@@ -344,7 +344,7 @@ export default function Home() {
                       {project.github ? <a href={project.repoURL} target='_blank' rel='noreferrer' className='tui-button'>{project.title} repo</a> : "no repo"}
                     </div>
                   </div>
-                  {project.img.length !== 0 ?  <img src="reamped-img.png" className="mt-2 rounded" /> : ""}
+                  {project.img.length !== 0 ? <img src="reamped-img.png" className="mt-2 rounded" /> : ""}
                 </motion.article>
               ))}
             </div>
@@ -362,9 +362,9 @@ export default function Home() {
           <p className="terminal-line">$ contact --secure</p>
           <p className="mt-4 text-muted">{t.contactBody}</p>
           <div className="mt-6 flex flex-wrap gap-3">
-            {/* <a href="mailto:hello@yourportfolio.dev" className="tui-button">
-              hello@yourportfolio.dev
-            </a> */}
+            <a href="mailto:Alex_plosivo_777@proton.me" className="tui-button">
+              Alex_plosivo_777@proton.me
+            </a>
             <a href="https://github.com/XxAlexplosivoxX" target="_blank" rel="noreferrer" className="tui-button">
               github
             </a>
