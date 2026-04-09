@@ -94,7 +94,7 @@ a {
   padding: 0.7rem 1rem;
 }
 
-.tui-button:hover {
+.tui-button:hover, .tui-button:active {
   border-color: var(--accent);
   color: var(--background);
   background: var(--accent);
@@ -112,7 +112,7 @@ a {
   transition: border-color 140ms ease, color 140ms ease, background-color 140ms ease;
 }
 
-.skill-badge:hover {
+.skill-badge:hover, .skill-badge:active {
   border-color: var(--accent);
   color: var(--accent);
   background: #0a1011;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 const skills = [
   "Rust",
@@ -91,6 +91,7 @@ type Language = keyof typeof copy;
 export default function Home() {
   const prefersReducedMotion = useReducedMotion();
   const [language, setLanguage] = useState<Language>("es");
+  const [menuOpen, setMenuOpen] = useState(false);
   const t = copy[language];
 
   const reveal = {
@@ -102,12 +103,65 @@ export default function Home() {
     },
   };
 
+  const mobileMenu = {
+    closed: {
+      opacity: 0,
+      height: 0,
+      transition: {
+        duration: prefersReducedMotion ? 0 : 0.2,
+        when: "afterChildren",
+        staggerChildren: prefersReducedMotion ? 0 : 0.03,
+        staggerDirection: -1,
+      },
+    },
+    open: {
+      opacity: 1,
+      height: "auto",
+      transition: {
+        duration: prefersReducedMotion ? 0 : 0.28,
+        when: "beforeChildren",
+        staggerChildren: prefersReducedMotion ? 0 : 0.06,
+      },
+    },
+  };
+
+  const mobileItem = {
+    closed: { opacity: 0, y: prefersReducedMotion ? 0 : -6 },
+    open: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: prefersReducedMotion ? 0 : 0.2,
+      },
+    },
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="border-b border-border nice-header">
-        <div className="mx-auto flex w-[min(980px,94vw)] flex-wrap items-center justify-between gap-4 text-sm">
+        <div className="mx-auto flex w-[min(980px,94vw)] items-center justify-between gap-4 text-sm">
           <p className="font-semibold text-accent">al3x@portfolio:~$</p>
-          <nav className="flex items-center gap-5 text-muted">
+          <button
+            type="button"
+            className="tui-button -skew-x-12 px-3 py-2 md:hidden"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            aria-label="Toggle navigation menu"
+          >
+            <motion.span
+              className="inline-block skew-x-12"
+              key={menuOpen ? "close" : "menu"}
+              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: prefersReducedMotion ? 0 : 4 }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.18 }}
+            >
+              {menuOpen ? "close" : "menu"}
+            </motion.span>
+          </button>
+
+          <nav className="hidden items-center gap-5 text-muted md:flex">
             <a href="#about" className="hover:text-background hover:bg-accent py-4 px-2 -skew-x-12">
               {t.navAbout}
             </a>
@@ -138,6 +192,69 @@ export default function Home() {
             </div>
           </nav>
         </div>
+
+        <AnimatePresence initial={false}>
+          {menuOpen && (
+            <motion.div
+              id="mobile-nav"
+              className="mx-auto w-[min(980px,94vw)] overflow-hidden border-t border-border py-3 md:hidden"
+              variants={mobileMenu}
+              initial="closed"
+              animate="open"
+              exit="closed"
+            >
+              <motion.nav className="flex flex-col items-start gap-2 text-muted">
+                <motion.a
+                  variants={mobileItem}
+                  href="#about"
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:text-background hover:bg-accent px-2 py-2 -skew-x-12"
+                >
+                  {t.navAbout}
+                </motion.a>
+                <motion.a
+                  variants={mobileItem}
+                  href="#projects"
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:text-background hover:bg-accent px-2 py-2 -skew-x-12"
+                >
+                  {t.navProjects}
+                </motion.a>
+                <motion.a
+                  variants={mobileItem}
+                  href="#contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:text-background hover:bg-accent px-2 py-2 -skew-x-12"
+                >
+                  {t.navContact}
+                </motion.a>
+
+                <motion.div
+                  variants={mobileItem}
+                  className="mt-2 inline-flex items-center gap-2 rounded border border-border language-selector px-2 py-1 text-xs"
+                >
+                  <span className="text-muted">{t.languageLabel}:</span>
+                  <button
+                    type="button"
+                    onClick={() => setLanguage("en")}
+                    className={`rounded lang-button px-2 py-0.5 ${language === "en" ? "bg-accent text-black" : "text-muted hover:text-accent"}`}
+                    aria-label="Switch to English"
+                  >
+                    EN
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLanguage("es")}
+                    className={`rounded lang-button px-2 py-0.5 ${language === "es" ? "bg-accent text-black" : "text-muted hover:text-accent"}`}
+                    aria-label="Cambiar a espanol"
+                  >
+                    ES
+                  </button>
+                </motion.div>
+              </motion.nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       <main className="mx-auto w-[min(980px,94vw)] py-8 md:py-12 content">
